@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DIP
+namespace ImageRecoStudio
 {
     public partial class AboutForm : Form
     {
@@ -39,7 +39,7 @@ namespace DIP
 
         private void linkLabel5_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://github.com/swient/DIP-MDI");
+            System.Diagnostics.Process.Start("https://github.com/swient/ImageRecoStudio");
         }
     }
 }

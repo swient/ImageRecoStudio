@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-namespace DIP
+namespace ImageRecoStudio
 {
     public partial class SliderForm : Form
     {
@@ -134,186 +134,186 @@ namespace DIP
             switch (Select)
             {
                 case "Brightness": // 亮度
-                {
-                    textBox1.Text = trackBar1.Value.ToString();
-
-                    Task.Run(() =>
                     {
-                        Bitmap bitmapCopy = null;
-                        int width = 0, height = 0, value = 0;
+                        textBox1.Text = trackBar1.Value.ToString();
 
-                        pictureBox1.Invoke((MethodInvoker)delegate
+                        Task.Run(() =>
                         {
-                            bitmapCopy = new Bitmap(NpBitmap);
-                            width = NpBitmap.Width;
-                            height = NpBitmap.Height;
-                            value = trackBar1.Value;
-                        });
+                            Bitmap bitmapCopy = null;
+                            int width = 0, height = 0, value = 0;
 
-                        // 使用泛用方法處理亮度
-                        Action<IntPtr, IntPtr, int, int, object[]> brightnessWrapper = (srcPtr, dstPtr, srcW, srcH, extra) =>
-                        {
-                            unsafe
+                            pictureBox1.Invoke((MethodInvoker)delegate
                             {
-                                ImageProcessUtils.brightness((int*)srcPtr, (int*)dstPtr, srcW, srcH, (int)extra[0]);
-                            }
-                        };
-                        Bitmap resultBitmap = ImageProcessUtils.ProcessBitmapChannels(bitmapCopy, width, height, brightnessWrapper, value);
+                                bitmapCopy = new Bitmap(NpBitmap);
+                                width = NpBitmap.Width;
+                                height = NpBitmap.Height;
+                                value = trackBar1.Value;
+                            });
 
-                        pictureBox1.Invoke((MethodInvoker)delegate
-                        {
-                            pBitmap = resultBitmap;
-                            pictureBox1.Image = pBitmap;
+                            // 使用泛用方法處理亮度
+                            Action<IntPtr, IntPtr, int, int, object[]> brightnessWrapper = (srcPtr, dstPtr, srcW, srcH, extra) =>
+                            {
+                                unsafe
+                                {
+                                    ImageProcessUtils.brightness((int*)srcPtr, (int*)dstPtr, srcW, srcH, (int)extra[0]);
+                                }
+                            };
+                            Bitmap resultBitmap = ImageProcessUtils.ProcessBitmapChannels(bitmapCopy, width, height, brightnessWrapper, value);
+
+                            pictureBox1.Invoke((MethodInvoker)delegate
+                            {
+                                pBitmap = resultBitmap;
+                                pictureBox1.Image = pBitmap;
+                            });
+
+                            bitmapCopy.Dispose();
                         });
-
-                        bitmapCopy.Dispose();
-                    });
-                    break;
-                }
+                        break;
+                    }
 
                 case "Contrast": // 對比度
-                {
-                    double c = (double)trackBar1.Value / 100;
-                    textBox1.Text = ((double)trackBar1.Value / 100).ToString();
-
-                    Task.Run(() =>
                     {
-                        Bitmap bitmapCopy = null;
-                        int width = 0, height = 0;
-                        double value = 0;
+                        double c = (double)trackBar1.Value / 100;
+                        textBox1.Text = ((double)trackBar1.Value / 100).ToString();
 
-                        pictureBox1.Invoke((MethodInvoker)delegate
+                        Task.Run(() =>
                         {
-                            bitmapCopy = new Bitmap(NpBitmap);
-                            width = NpBitmap.Width;
-                            height = NpBitmap.Height;
-                            value = (double)trackBar1.Value / 100;
-                        });
+                            Bitmap bitmapCopy = null;
+                            int width = 0, height = 0;
+                            double value = 0;
 
-                        // 使用泛用方法處理對比度
-                        Action<IntPtr, IntPtr, int, int, object[]> contrastWrapper = (srcPtr, dstPtr, srcW, srcH, extra) =>
-                        {
-                            unsafe
+                            pictureBox1.Invoke((MethodInvoker)delegate
                             {
-                                ImageProcessUtils.contrast((int*)srcPtr, (int*)dstPtr, srcW, srcH, (double)extra[0]);
-                            }
-                        };
-                        Bitmap resultBitmap = ImageProcessUtils.ProcessBitmapChannels(bitmapCopy, width, height, contrastWrapper, value);
+                                bitmapCopy = new Bitmap(NpBitmap);
+                                width = NpBitmap.Width;
+                                height = NpBitmap.Height;
+                                value = (double)trackBar1.Value / 100;
+                            });
 
-                        pictureBox1.Invoke((MethodInvoker)delegate
-                        {
-                            pBitmap = resultBitmap;
-                            pictureBox1.Image = pBitmap;
+                            // 使用泛用方法處理對比度
+                            Action<IntPtr, IntPtr, int, int, object[]> contrastWrapper = (srcPtr, dstPtr, srcW, srcH, extra) =>
+                            {
+                                unsafe
+                                {
+                                    ImageProcessUtils.contrast((int*)srcPtr, (int*)dstPtr, srcW, srcH, (double)extra[0]);
+                                }
+                            };
+                            Bitmap resultBitmap = ImageProcessUtils.ProcessBitmapChannels(bitmapCopy, width, height, contrastWrapper, value);
+
+                            pictureBox1.Invoke((MethodInvoker)delegate
+                            {
+                                pBitmap = resultBitmap;
+                                pictureBox1.Image = pBitmap;
+                            });
+
+                            bitmapCopy.Dispose();
                         });
-
-                        bitmapCopy.Dispose();
-                    });
-                    break;
-                }
+                        break;
+                    }
 
                 case "AverageFilter": // 平均濾波
-                {
-                    textBox1.Text = trackBar1.Value.ToString();
-                    int width = NpBitmap.Width;
-                    int height = NpBitmap.Height;
-                    int value = trackBar1.Value;
-
-                    // 使用泛用方法處理平均濾波
-                    Action<IntPtr, IntPtr, int, int, object[]> avgFilterWrapper = (srcPtr, dstPtr, srcW, srcH, extra) =>
                     {
-                        unsafe
-                        {
-                            ImageProcessUtils.averagefilter((int*)srcPtr, (int*)dstPtr, srcW, srcH, (int)extra[0]);
-                        }
-                    };
-                    pBitmap = ImageProcessUtils.ProcessBitmapChannels(NpBitmap, width, height, avgFilterWrapper, value);
-                    break;
-                }
+                        textBox1.Text = trackBar1.Value.ToString();
+                        int width = NpBitmap.Width;
+                        int height = NpBitmap.Height;
+                        int value = trackBar1.Value;
 
-                case "CustomRotation": // 自訂旋轉角度
-                {
-                    textBox1.Text = trackBar1.Value.ToString();
-
-                    Task.Run(() =>
-                    {
-                        Bitmap bitmapCopy = null;
-                        int width = 0, height = 0, value = 0;
-
-                        pictureBox1.Invoke((MethodInvoker)delegate
-                        {
-                            bitmapCopy = new Bitmap(NpBitmap);
-                            width = NpBitmap.Width;
-                            height = NpBitmap.Height;
-                            value = trackBar1.Value;
-                        });
-
-                        double theta = (double)value * Math.PI / 180;
-                        int new_weight = (int)Math.Round(height * Math.Abs(Math.Sin(theta)) + width * Math.Abs(Math.Cos(theta)));
-                        int new_height = (int)Math.Round(height * Math.Abs(Math.Cos(theta)) + width * Math.Abs(Math.Sin(theta)));
-
-                        // 使用泛用方法處理自訂旋轉角度
-                        Action<IntPtr, IntPtr, int, int, object[]> customRotateWrapper = (srcPtr, dstPtr, srcW, srcH, extra) =>
+                        // 使用泛用方法處理平均濾波
+                        Action<IntPtr, IntPtr, int, int, object[]> avgFilterWrapper = (srcPtr, dstPtr, srcW, srcH, extra) =>
                         {
                             unsafe
                             {
-                                ImageProcessUtils.customrotationangle((int*)srcPtr, (int*)dstPtr, srcW, srcH, (int)extra[0]);
+                                ImageProcessUtils.averagefilter((int*)srcPtr, (int*)dstPtr, srcW, srcH, (int)extra[0]);
                             }
                         };
-                        Bitmap rotatedBitmap = ImageProcessUtils.ProcessBitmapChannels(bitmapCopy, new_weight, new_height, customRotateWrapper, value);
+                        pBitmap = ImageProcessUtils.ProcessBitmapChannels(NpBitmap, width, height, avgFilterWrapper, value);
+                        break;
+                    }
 
-                        pictureBox1.Invoke((MethodInvoker)delegate
+                case "CustomRotation": // 自訂旋轉角度
+                    {
+                        textBox1.Text = trackBar1.Value.ToString();
+
+                        Task.Run(() =>
                         {
-                            pBitmap = rotatedBitmap;
-                            pictureBox1.Image = pBitmap;
-                        });
+                            Bitmap bitmapCopy = null;
+                            int width = 0, height = 0, value = 0;
 
-                        bitmapCopy.Dispose();
-                    });
-                    break;
-                }
+                            pictureBox1.Invoke((MethodInvoker)delegate
+                            {
+                                bitmapCopy = new Bitmap(NpBitmap);
+                                width = NpBitmap.Width;
+                                height = NpBitmap.Height;
+                                value = trackBar1.Value;
+                            });
+
+                            double theta = (double)value * Math.PI / 180;
+                            int new_weight = (int)Math.Round(height * Math.Abs(Math.Sin(theta)) + width * Math.Abs(Math.Cos(theta)));
+                            int new_height = (int)Math.Round(height * Math.Abs(Math.Cos(theta)) + width * Math.Abs(Math.Sin(theta)));
+
+                            // 使用泛用方法處理自訂旋轉角度
+                            Action<IntPtr, IntPtr, int, int, object[]> customRotateWrapper = (srcPtr, dstPtr, srcW, srcH, extra) =>
+                            {
+                                unsafe
+                                {
+                                    ImageProcessUtils.customrotationangle((int*)srcPtr, (int*)dstPtr, srcW, srcH, (int)extra[0]);
+                                }
+                            };
+                            Bitmap rotatedBitmap = ImageProcessUtils.ProcessBitmapChannels(bitmapCopy, new_weight, new_height, customRotateWrapper, value);
+
+                            pictureBox1.Invoke((MethodInvoker)delegate
+                            {
+                                pBitmap = rotatedBitmap;
+                                pictureBox1.Image = pBitmap;
+                            });
+
+                            bitmapCopy.Dispose();
+                        });
+                        break;
+                    }
 
                 case "LocalMosaic": // 局部馬賽克
-                {
-                    textBox1.Text = trackBar1.Value.ToString();
-                    int width = NpBitmap.Width;
-                    int height = NpBitmap.Height;
-                    int value = trackBar1.Value;
-                    int[] region = new int[4];
-                    region[0] = selectionStart.X;
-                    region[1] = selectionStart.Y;
-                    region[2] = selectionEnd.X;
-                    region[3] = selectionEnd.Y;
-
-                    // 使用泛用方法處理局部馬賽克
-                    Action<IntPtr, IntPtr, int, int, object[]> mosaicWrapper = (srcPtr, dstPtr, srcW, srcH, extra) =>
                     {
-                        unsafe
+                        textBox1.Text = trackBar1.Value.ToString();
+                        int width = NpBitmap.Width;
+                        int height = NpBitmap.Height;
+                        int value = trackBar1.Value;
+                        int[] region = new int[4];
+                        region[0] = selectionStart.X;
+                        region[1] = selectionStart.Y;
+                        region[2] = selectionEnd.X;
+                        region[3] = selectionEnd.Y;
+
+                        // 使用泛用方法處理局部馬賽克
+                        Action<IntPtr, IntPtr, int, int, object[]> mosaicWrapper = (srcPtr, dstPtr, srcW, srcH, extra) =>
                         {
-                            ImageProcessUtils.mosaic((int*)srcPtr, (int*)dstPtr, srcW, srcH, (int)extra[0], (int[])extra[1]);
-                        }
-                    };
-                    pBitmap = ImageProcessUtils.ProcessBitmapChannels(NpBitmap, width, height, mosaicWrapper, value, region);
-                    break;
-                }
+                            unsafe
+                            {
+                                ImageProcessUtils.mosaic((int*)srcPtr, (int*)dstPtr, srcW, srcH, (int)extra[0], (int[])extra[1]);
+                            }
+                        };
+                        pBitmap = ImageProcessUtils.ProcessBitmapChannels(NpBitmap, width, height, mosaicWrapper, value, region);
+                        break;
+                    }
 
                 case "BitPlane": // 位元切片
-                {
-                    textBox1.Text = trackBar1.Value.ToString();
-                    int width = NpBitmap.Width;
-                    int height = NpBitmap.Height;
-                    int value = trackBar1.Value;
-                    
-                    // 使用泛用方法處理位元切片
-                    Action<IntPtr, IntPtr, int, int, object[]> bitplaneWrapper = (srcPtr, dstPtr, srcW, srcH, extra) =>
                     {
-                        unsafe
+                        textBox1.Text = trackBar1.Value.ToString();
+                        int width = NpBitmap.Width;
+                        int height = NpBitmap.Height;
+                        int value = trackBar1.Value;
+
+                        // 使用泛用方法處理位元切片
+                        Action<IntPtr, IntPtr, int, int, object[]> bitplaneWrapper = (srcPtr, dstPtr, srcW, srcH, extra) =>
                         {
-                            ImageProcessUtils.bitplane((int*)srcPtr, (int*)dstPtr, srcW, srcH, (int)extra[0]);
-                        }
-                    };
-                    pBitmap = ImageProcessUtils.ProcessBitmapChannels(NpBitmap, width, height, bitplaneWrapper, value);
-                    break;
-                }
+                            unsafe
+                            {
+                                ImageProcessUtils.bitplane((int*)srcPtr, (int*)dstPtr, srcW, srcH, (int)extra[0]);
+                            }
+                        };
+                        pBitmap = ImageProcessUtils.ProcessBitmapChannels(NpBitmap, width, height, bitplaneWrapper, value);
+                        break;
+                    }
             }
 
             pictureBox1.Image = pBitmap;
@@ -379,10 +379,10 @@ namespace DIP
                 msForm.pf1 = this.pf1;
                 msForm.pf2 = this.pf2;
                 msForm.pf3 = this.pf3;
-                
+
                 // 創建新 Bitmap 副本並傳遞給 MSForm
                 msForm.pBitmap = new Bitmap(pBitmap);
-                msForm.AddImageTab(OriginalTabTitle, new Bitmap(pBitmap)); 
+                msForm.AddImageTab(OriginalTabTitle, new Bitmap(pBitmap));
                 msForm.Show();
             }
             else

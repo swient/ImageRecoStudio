@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DIP
+namespace ImageRecoStudio
 {
     internal static class Program
     {
@@ -33,7 +33,7 @@ namespace DIP
             }
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new DIPSample());
+            Application.Run(new MainForm());
         }
     }
 }

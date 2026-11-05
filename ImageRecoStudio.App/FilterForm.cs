@@ -13,7 +13,7 @@ using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar;
 
-namespace DIP
+namespace ImageRecoStudio
 {
     public partial class FilterForm : Form
     {

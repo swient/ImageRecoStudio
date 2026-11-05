@@ -11,7 +11,7 @@ using System.Windows.Forms;
 using OxyPlot;
 using OxyPlot.WindowsForms;
 
-namespace DIP
+namespace ImageRecoStudio
 {
     public partial class MSForm : Form
     {

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
@@ -7,54 +7,54 @@ using OxyPlot.Series;
 using OxyPlot.Axes;
 using OxyPlot.WindowsForms;
 
-namespace DIP
+namespace ImageRecoStudio
 {
     public static class ImageProcessUtils
     {
         // 載入圖像處理 DLL 函式庫
-        [DllImport("B11217048.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("ImageRecoStudio.Native.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern unsafe void negative(int* src, int* dst, int srcW, int srcH);
 
-        [DllImport("B11217048.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("ImageRecoStudio.Native.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern unsafe void mosaic(int* src, int* dst, int srcW, int srcH, int size, int[] region);
 
-        [DllImport("B11217048.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("ImageRecoStudio.Native.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern unsafe void equalization(int* src, int* dst, int srcW, int srcH);
 
-        [DllImport("B11217048.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("ImageRecoStudio.Native.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern unsafe void otsuthreshold(int* src, int* dst, int srcW, int srcH, int* threshold);
 
-        [DllImport("B11217048.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("ImageRecoStudio.Native.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern unsafe void connectedcomponent(int* src, int srcW, int srcH, int* labelCount);
 
-        [DllImport("B11217048.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("ImageRecoStudio.Native.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern unsafe void highpassfilter(int* src, int* dst, int srcW, int srcH);
 
-        [DllImport("B11217048.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("ImageRecoStudio.Native.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern unsafe void customrotationangle(int* src, int* dst, int srcW, int srcH, int angle);
 
-        [DllImport("B11217048.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("ImageRecoStudio.Native.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern unsafe void zoom(int* src, int* dst, int srcW, int srcH, double scale);
 
-        [DllImport("B11217048.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("ImageRecoStudio.Native.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern unsafe void brightness(int* src, int* dst, int srcW, int srcH, int value);
 
-        [DllImport("B11217048.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("ImageRecoStudio.Native.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern unsafe void contrast(int* src, int* dst, int srcW, int srcH, double value);
 
-        [DllImport("B11217048.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("ImageRecoStudio.Native.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern unsafe void bitplane(int* src, int* dst, int srcW, int srcH, int index);
 
-        [DllImport("B11217048.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("ImageRecoStudio.Native.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern unsafe void fliphorizontal(int* src, int* dst, int srcW, int srcH);
 
-        [DllImport("B11217048.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("ImageRecoStudio.Native.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern unsafe void flipvertical(int* src, int* dst, int srcW, int srcH);
 
-        [DllImport("B11217048.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("ImageRecoStudio.Native.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern unsafe void averagefilter(int* src, int* dst, int srcW, int srcH, int size);
 
-        [DllImport("B11217048.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("ImageRecoStudio.Native.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern unsafe void customfilter(int* src, int* dst, int srcW, int srcH, int divisor, int[] customKernel);
 
         // 計算圖片的直方圖
@@ -62,7 +62,7 @@ namespace DIP
         {
             if (bitmap == null)
                 throw new ArgumentNullException(nameof(bitmap), "傳入的 Bitmap 不能為 null");
-                
+
             int[] histogram = new int[256];
             BitmapData data = null;
 
@@ -108,7 +108,7 @@ namespace DIP
         {
             if (histogram == null)
                 throw new ArgumentNullException(nameof(histogram), "直方圖數據不能為 null");
-                
+
             var plotModel = new PlotModel();
 
             var series = new HistogramSeries()
@@ -148,7 +148,7 @@ namespace DIP
         {
             if (myBitmap == null)
                 throw new ArgumentNullException(nameof(myBitmap), "傳入的 Bitmap 不能為 null");
-                
+
             int[] ImgData = new int[myBitmap.Width * myBitmap.Height];
             BitmapData byteArray = null;
 
@@ -213,7 +213,7 @@ namespace DIP
                 throw new ArgumentException("圖像寬度和高度必須大於0");
             if (ImgData.Length < Width * Height)
                 throw new ArgumentException("圖像數據長度不足");
-                
+
             Bitmap myBitmap = new Bitmap(Width, Height, PixelFormat.Format8bppIndexed);
 
             // 設定灰階調色板
@@ -262,7 +262,7 @@ namespace DIP
                 {
                     myBitmap.Dispose();
                 }
-                
+
                 throw new InvalidOperationException("將陣列轉換為 Bitmap 時發生錯誤", ex);
             }
             finally

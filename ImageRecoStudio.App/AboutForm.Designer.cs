@@ -1,4 +1,4 @@
-namespace DIP
+namespace ImageRecoStudio
 {
     partial class AboutForm
     {
@@ -79,7 +79,7 @@ namespace DIP
             // 
             this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Image = global::DIP.Properties.Resources.swient;
+            this.pictureBox1.Image = global::ImageRecoStudio.Properties.Resources.swient;
             this.pictureBox1.Location = new System.Drawing.Point(25, 16);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(50, 50);
@@ -196,14 +196,14 @@ namespace DIP
             this.linkLabel5.Size = new System.Drawing.Size(316, 23);
             this.linkLabel5.TabIndex = 8;
             this.linkLabel5.TabStop = true;
-            this.linkLabel5.Text = "https://github.com/swient/DIP-MDI";
+            this.linkLabel5.Text = "https://github.com/swient/ImageRecoStudio";
             this.linkLabel5.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel5_LinkClicked);
             // 
             // pictureBox2
             // 
             this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox2.Image = global::DIP.Properties.Resources.famouseegg;
+            this.pictureBox2.Image = global::ImageRecoStudio.Properties.Resources.famouseegg;
             this.pictureBox2.Location = new System.Drawing.Point(278, 16);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(50, 50);
@@ -215,7 +215,7 @@ namespace DIP
             // 
             this.pictureBox3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox3.Image = global::DIP.Properties.Resources.Rooong;
+            this.pictureBox3.Image = global::ImageRecoStudio.Properties.Resources.Rooong;
             this.pictureBox3.Location = new System.Drawing.Point(25, 98);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(50, 50);
@@ -227,7 +227,7 @@ namespace DIP
             // 
             this.pictureBox4.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox4.Image = global::DIP.Properties.Resources.fush0528;
+            this.pictureBox4.Image = global::ImageRecoStudio.Properties.Resources.fush0528;
             this.pictureBox4.Location = new System.Drawing.Point(278, 98);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(50, 50);
@@ -274,7 +274,7 @@ namespace DIP
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Icon = global::DIP.Properties.Resources.About;
+            this.Icon = global::ImageRecoStudio.Properties.Resources.About;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AboutForm";

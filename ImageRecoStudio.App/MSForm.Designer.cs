@@ -1,4 +1,4 @@
-namespace DIP
+namespace ImageRecoStudio
 {
     partial class MSForm
     {
@@ -49,7 +49,7 @@ namespace DIP
             this.ClientSize = new System.Drawing.Size(533, 300);
             this.Controls.Add(this.tabControl1);
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.Icon = global::DIP.Properties.Resources.ChildForm;
+            this.Icon = global::ImageRecoStudio.Properties.Resources.ChildForm;
             this.Name = "MSForm";
             this.Text = "MSForm";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MSForm_FormClosed);

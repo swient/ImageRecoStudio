@@ -1,6 +1,6 @@
-namespace DIP
+namespace ImageRecoStudio
 {
-    partial class DIPSample
+    partial class MainForm
     {
         /// <summary>
         /// 設計工具所需的變數。
@@ -400,19 +400,19 @@ namespace DIP
             this.位元切片ToolStripMenuItem.Text = "位元切片";
             this.位元切片ToolStripMenuItem.Click += new System.EventHandler(this.位元切片ToolStripMenuItem_Click);
             // 
-            // DIPSample
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1578, 944);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
-            this.Icon = global::DIP.Properties.Resources.MainForm;
+            this.Icon = global::ImageRecoStudio.Properties.Resources.MainForm;
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "DIPSample";
-            this.Text = "DIPSample";
-            this.Load += new System.EventHandler(this.DIPSample_Load);
-            this.MdiChildActivate += new System.EventHandler(this.DIPSample_MdiChildActivate);
+            this.Name = "MainForm";
+            this.Text = "ImageRecoStudio";
+            this.Load += new System.EventHandler(this.MainForm_Load);
+            this.MdiChildActivate += new System.EventHandler(this.MainForm_MdiChildActivate);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);

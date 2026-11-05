@@ -16,18 +16,18 @@ using OxyPlot.Axes;
 using OxyPlot.WindowsForms;
 using System.IO;
 
-namespace DIP
+namespace ImageRecoStudio
 {
-    public partial class DIPSample : Form
+    public partial class MainForm : Form
     {
         Bitmap NpBitmap;
 
-        public DIPSample()
+        public MainForm()
         {
             InitializeComponent();
         }
 
-        private void DIPSample_Load(object sender, EventArgs e)
+        private void MainForm_Load(object sender, EventArgs e)
         {
             this.IsMdiContainer = true; // 設定為 MDI 容器
             this.toolStripStatusLabel1.Text = "";
@@ -36,7 +36,7 @@ namespace DIP
             UpdateMenuState(); // 初始化選單狀態
         }
 
-        private void DIPSample_MdiChildActivate(object sender, EventArgs e)
+        private void MainForm_MdiChildActivate(object sender, EventArgs e)
         {
             // 延後執行，確保 MSForm 在狀態完成後更新選單狀態
             this.BeginInvoke(new Action(() => UpdateMenuState()));
@@ -72,7 +72,7 @@ namespace DIP
                 openFileDialog.CheckFileExists = true; // 檢查檔案是否存在
                 openFileDialog.CheckPathExists = true; // 檢查路徑是否存在
                 openFileDialog.ValidateNames = true; // 驗證檔案名稱是否有效
-                openFileDialog.Title = "Open File - DIP Sample";
+                openFileDialog.Title = "Open File - ImageRecoStudio";
                 openFileDialog.Filter = "Image Files|*.bmp;*.png;*.jpg;*.jpeg";
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
@@ -126,7 +126,7 @@ namespace DIP
                         saveFileDialog.Filter = "Bitmap Files (*.bmp)|*.bmp|" +
                                                "PNG Files (*.png)|*.png|" +
                                                "JPEG Files (*.jpg)|*.jpg";
-                        saveFileDialog.Title = "Save File - DIP Sample";
+                        saveFileDialog.Title = "Save File - ImageRecoStudio";
                         saveFileDialog.FileName = "image.bmp";
                         saveFileDialog.AddExtension = true; // 自動添加副檔名
 
@@ -359,7 +359,7 @@ namespace DIP
                 int[] f = ImageProcessUtils.BitmapToArray(NpBitmap);
                 int[] g = new int[NpBitmap.Width * NpBitmap.Height];
                 int threshold = 0;
-                
+
                 // 使用 unsafe 區域進行指針處理
                 unsafe
                 {
@@ -476,7 +476,7 @@ namespace DIP
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"生成直方圖時發生錯誤: {ex.Message}", "錯誤", 
+                    MessageBox.Show($"生成直方圖時發生錯誤: {ex.Message}", "錯誤",
                                   MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
